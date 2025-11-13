@@ -1,11 +1,11 @@
 apiVersion: cozystack.io/v1alpha1
 kind: CozystackResourceDefinition
 metadata:
-  name: mongodb
+  name: wordpress
   namespace: cozy-system
 spec:
   application:
-    kind: MongoDB
+    kind: Wordpress
     openAPISchema: |
       {
         "properties": {
@@ -23,23 +23,23 @@ spec:
         "title": "Chart Values",
         "type": "object"
       }
-    plural: mongodbs
-    singular: mongodb
+    plural: wordpress
+    singular: wordpress
   release:
     chart:
-      name: ./packages/apps/mongodb
+      name: ./packages/apps/wordpress
       sourceRef:
         kind: GitRepository
         name: external-apps
         namespace: cozy-public
     labels:
       cozystack.io/ui: "true"
-    prefix: mongodb-
+    prefix: wordpress-
   dashboard:
-    category: PaaS
-    singular: MongoDB
-    plural: MongoDB
-    description: MongoDB is a popular NoSQL database.
+    category: SaaS
+    singular: Wordpress
+    plural: Wordpress
+    description: Wordpress is popular CMS.
     tags:
-      - database
-    icon: PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwLjU4NSAyMy4xODVDMjAuNTg1IDIyLjcwNiAyMC4zODUgMjIuMjk3IDIwLjA0NSAyMS45NzVDMTguMTc1IDIwLjE1NSAxNi43NDUgMTcuNDY1IDE2LjI4NSAxNS42NDVDMTYuMjc1IDE1LjYyNSAxNi4yNzUgMTUuNjA1IDE2LjI2NSAxNS41ODVDMTYuMjY1IDE1LjU3NSAxNi4yNjUgMTUuNTY1IDE2LjI2NSAxNS41NDVDMTYuMTA1IDE0LjkwNSAxNS45MDUgMTQuMjU1IDE1LjcwNSAxMy42NzVDMTQuODI1IDExLjA5NSAxNC4xNjUgOS4xNzUgMTMuNDU1IDcuNzY1QzEzLjMwNSAxNS43NDUgMTQuOTg1IDE3LjUwNSAxNy4xNjUgMTguMzM1QzE3LjMwNSAxOC4zODUgMTcuNTA1IDE4LjQ0NSAxNy43MDUgMTguNDk1TDE3LjcwNSAyMS45NzdDMjAuMjY1IDI0LjQ5NSAyMy40NTUgMjMuMzQ1IDIzLjQ1NSAyMy4zNDVMMjAuNTg1IDIzLjE4NVoiIGZpbGw9IiMwODBBNTMiLz4KPC9zdmc+
+      - cms
+    icon: PHN2ZyB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMS4yOCAxLjI4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGN4PSIxNiIgY3k9IjE2IiByPSIxNCIgZmlsbD0iIzAyOENCMCIgZD0iTTEuMiAwLjY0QTAuNTYgMC41NiAwIDAgMSAwLjY0IDEuMkEwLjU2IDAuNTYgMCAwIDEgMC4wOCAwLjY0QTAuNTYgMC41NiAwIDAgMSAxLjIgMC42NHoiLz48cGF0aCBkPSJNMCAyNTggMC42NGMwIDAuMTUxIDAuMDg4IDAuMjgyIDAuMjE1IDAuMzQ0TDAuMjkxIDAuNDg1QTAuMzggMC4zOCAwIDAgMCAwLjI1OCAwLjY0TTAgNjQxLjAyMmEwLjM4OCAwLjM4OCAwIDAgMCAwLjEyNyAtMC4wMjJsLTAuMDAzIC0wLjAwNSAtMC4xMTcgLTAuMzIyIC0wLjExNCAwLjMzM2MwLjAzNCAwLjAxIDAuMDcgMC4wMTYgMC4xMDggMC4wMTZtMC4wNTIgLTAuNTYxIDAuMTM4IDAuNDExIDAuMDM4IC0wLjEyN2MwLjAxNiAtMC4wNTMgMC4wMjkgLTAuMDkxIDAuMDI5IC0wLjEyNCAwIC0wLjA0NyAtMC4wMTcgLTAuMDggLTAuMDMxIC0wLjEwNSAtMC4wMiAtMC4wMzIgLTAuMDM4IC0wLjA1OSAtMC4wMzggLTAuMDkgMCAgLTAuMDM1IDAuMDI2IC0wLjA2OCAwLjA2NCAtMC4wNjhoMC4wMDVBMC4zOCAwLjM4IDAgMCAwIDAuNjQgMC4yNThhMC4zODIgMC4zODIgMCAwIDAgLTAuMzE5IDAuMTcydDAuMDI0IDAuMDAxYzAuMDQgMCAwLjEwMiAtMC4wMDUgMC4xMDIgLTAuMDA1IDAuMDIxIC0wLjAwMSAwLjAyMyAwLjAyOSAwLjAwMyAwLjAzMSAwIDAgLTAuMDIxIDAuMDAzIC0wLjA0NCAwLjAwNGwwLjEzOSA0LjE0IDAuMDg0IC0wLjI1IC0wLjA2IC0wLjE2M2EwLjY4IDAuNjggMCAwIDEgLTAuMDQgLTAuMDAzYy0wLjAyMSAtMC4wMDEgLTAuMDE4IC0wLjAzMyAwLjAwMiAtMC4wMzIgMCAgMCAwLjA2MyAwLjAwNSAwLjEgMC4wMDUgMC4wNCAwIDAuMTAyIC0wLjAwNSAwLjEwMiAtMC4wMDUgMC4wMjEgLTAuMDAxIDAuMDIzIDAuMDI5IDAuMDAzIDAuMDMxIDAgIDAgLTAuMDIxIDAuMDAyIC0wLjA0NCAwLjAwNG0wLjEzOSA1MDlhMC4zODIgMC4zODIgMCAwIDAgMC4xNDMgLTAuNTEzIDAuMzYgMC4zNiAwIDAgMSAtMC4wMjYgMC4xNzZ6TTAgNjQxLjA4YTAuNDQgMC40NCAwIDEgMSAwIC0wLjg4IDAuNDQgMC40NCAwIDAgMSAwIDAuODgiIGZpbGw9IndoaXRlIi8+PC9zdmc+
