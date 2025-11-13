@@ -9,16 +9,10 @@ spec:
     openAPISchema: |
       {
         "properties": {
-          "members": {
-            "default": 3,
-            "description": "Number of MongoDB members in the replica set.",
-            "type": "integer"
-          },
-          "name": {
-            "default": "",
-            "description": "Custom name for the MongoDB replica set. Optional.",
+          "LOG_LEVEL": {
+            "default": "error",
+            "description": "Wordpress LOG_LEVEL setting.",
             "type": "string"
-          }
         },
         "title": "Chart Values",
         "type": "object"
