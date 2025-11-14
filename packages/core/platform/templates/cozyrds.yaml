@@ -11,9 +11,15 @@ spec:
         "properties": {
           "LOG_LEVEL": {
             "default": "error",
-            "description": "Wordpress LOG_LEVEL setting.",
+            "description": "Wordpress LOG_LEVEL setting. Optional",
             "type": "string"
         },
+          "name": {
+            "default": "",
+            "description": "Custom name for the Wordpress replica set. Optional.",
+            "type": "string"
+          }
+        }
         "title": "Chart Values",
         "type": "object"
       }
