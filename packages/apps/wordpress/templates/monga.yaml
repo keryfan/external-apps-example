@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: qwert
 data:
-  members: {{ .Values.members | quote }}
+  LOG_LEVEL: {{ .Values.LOG_LEVEL | quote }}
