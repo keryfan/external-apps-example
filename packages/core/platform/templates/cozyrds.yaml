@@ -5,40 +5,57 @@ metadata:
   namespace: cozy-system
 spec:
   application:
-    kind: Wordpress
+    kind: WordPress
     openAPISchema: |
       {
+        "title": "WordPress Configuration",
+        "type": "object",
         "properties": {
-          "LOG_LEVEL": {
-            "default": "error",
-            "description": "Wordpress LOG_LEVEL setting. Optional",
-            "type": "string"
-        },
           "name": {
             "default": "",
-            "description": "Custom name for the Wordpress replica set. Optional.",
+            "description": "Custom name for WordPress instance. Optional.",
             "type": "string"
+          },
+          "replicaCount": {
+            "default": 1,
+            "description": "Number of WordPress replicas",
+            "type": "integer"
+          },
+          "wordpressUsername": {
+            "type": "string",
+            "default": "user",
+            "description": "WordPress admin username"
+          },
+          "wordpressPassword": {
+            "type": "string",
+            "default": "",
+            "description": "WordPress admin password"
+          },
+          "wordpressEmail": {
+            "type": "string",
+            "default": "user@example.com",
+            "description": "WordPress admin email"
           }
         }
-        "title": "Chart Values",
-        "type": "object"
       }
-    plural: wordpress
+    plural: wordpresses
     singular: wordpress
   release:
     chart:
       name: ./packages/apps/wordpress
       sourceRef:
         kind: GitRepository
-        name: external-apps
+        name: wordpress-external-apps
         namespace: cozy-public
     labels:
       cozystack.io/ui: "true"
     prefix: wordpress-
   dashboard:
-    category: PaaS
-    singular: Wordpress
-    plural: Wordpress
-    description: Wordpress is popular CMS.
+    category: Applications
+    singular: WordPress
+    plural: WordPresses
+    description: Web content management system
     tags:
-    icon: PHN2ZyB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMS4yOCAxLjI4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGN4PSIxNiIgY3k9IjE2IiByPSIxNCIgZmlsbD0iIzAyOENCMCIgZD0iTTEuMiAwLjY0QTAuNTYgMC41NiAwIDAgMSAwLjY0IDEuMkEwLjU2IDAuNTYgMCAwIDEgMC4wOCAwLjY0QTAuNTYgMC41NiAwIDAgMSAxLjIgMC42NHoiLz48cGF0aCBkPSJNMCAyNTggMC42NGMwIDAuMTUxIDAuMDg4IDAuMjgyIDAuMjE1IDAuMzQ0TDAuMjkxIDAuNDg1QTAuMzggMC4zOCAwIDAgMCAwLjI1OCAwLjY0TTAgNjQxLjAyMmEwLjM4OCAwLjM4OCAwIDAgMCAwLjEyNyAtMC4wMjJsLTAuMDAzIC0wLjAwNSAtMC4xMTcgLTAuMzIyIC0wLjExNCAwLjMzM2MwLjAzNCAwLjAxIDAuMDcgMC4wMTYgMC4xMDggMC4wMTZtMC4wNTIgLTAuNTYxIDAuMTM4IDAuNDExIDAuMDM4IC0wLjEyN2MwLjAxNiAtMC4wNTMgMC4wMjkgLTAuMDkxIDAuMDI5IC0wLjEyNCAwIC0wLjA0NyAtMC4wMTcgLTAuMDggLTAuMDMxIC0wLjEwNSAtMC4wMiAtMC4wMzIgLTAuMDM4IC0wLjA1OSAtMC4wMzggLTAuMDkgMCAgLTAuMDM1IDAuMDI2IC0wLjA2OCAwLjA2NCAtMC4wNjhoMC4wMDVBMC4zOCAwLjM4IDAgMCAwIDAuNjQgMC4yNThhMC4zODIgMC4zODIgMCAwIDAgLTAuMzE5IDAuMTcydDAuMDI0IDAuMDAxYzAuMDQgMCAwLjEwMiAtMC4wMDUgMC4xMDIgLTAuMDA1IDAuMDIxIC0wLjAwMSAwLjAyMyAwLjAyOSAwLjAwMyAwLjAzMSAwIDAgLTAuMDIxIDAuMDAzIC0wLjA0NCAwLjAwNGwwLjEzOSA0LjE0IDAuMDg0IC0wLjI1IC0wLjA2IC0wLjE2M2EwLjY4IDAuNjggMCAwIDEgLTAuMDQgLTAuMDAzYy0wLjAyMSAtMC4wMDEgLTAuMDE4IC0wLjAzMyAwLjAwMiAtMC4wMzIgMCAgMCAwLjA2MyAwLjAwNSAwLjEgMC4wMDUgMC4wNCAwIDAuMTAyIC0wLjAwNSAwLjEwMiAtMC4wMDUgMC4wMjEgLTAuMDAxIDAuMDIzIDAuMDI5IDAuMDAzIDAuMDMxIDAgIDAgLTAuMDIxIDAuMDAyIC0wLjA0NCAwLjAwNG0wLjEzOSA1MDlhMC4zODIgMC4zODIgMCAwIDAgMC4xNDMgLTAuNTEzIDAuMzYgMC4zNiAwIDAgMSAtMC4wMjYgMC4xNzZ6TTAgNjQxLjA4YTAuNDQgMC40NCAwIDEgMSAwIC0wLjg4IDAuNDQgMC40NCAwIDAgMSAwIDAuODgiIGZpbGw9IndoaXRlIi8+PC9zdmc+
+      - cms
+      - web
+    icon: PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBVcGxvYWRlZCB0bzogU1ZHIFJlcG8sIHd3dy5zdmdyZXBvLmNvbSwgR2VuZXJhdG9yOiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4NCjxzdmcgaGVpZ2h0PSI4MDBweCIgd2lkdGg9IjgwMHB4IiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIA0KCSB2aWV3Qm94PSIwIDAgMjUuOTI1IDI1LjkyNSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMDMwMTA0OyIgZD0iTTEuODQzLDEyLjk2MmMwLDQuNDAxLDIuNTU3LDguMjA1LDYuMjY3LDEwLjAwOEwyLjgwNSw4LjQzN0MyLjE4OSw5LjgxOSwxLjg0MywxMS4zNSwxLjg0MywxMi45NjJ6DQoJCSBNMjAuNDY5LDEyLjRjMC0xLjM3NC0wLjQ5My0yLjMyNi0wLjkxNy0zLjA2NmMtMC41NjMtMC45MTctMS4wOTItMS42OTEtMS4wOTItMi42MDhjMC0xLjAyMSwwLjc3NS0xLjk3MywxLjg2Ny0xLjk3Mw0KCQljMC4wNDksMCwwLjA5NiwwLjAwNiwwLjE0NSwwLjAwOGMtMS45NzktMS44MTMtNC42MTUtMi45MTktNy41MDktMi45MTljLTMuODg1LDAtNy4zMDMsMS45OTMtOS4yOTEsNS4wMTMNCgkJYzAuMjYxLDAuMDA4LDAuNTA3LDAuMDEzLDAuNzE2LDAuMDEzYzEuMTYzLDAsMi45NjMtMC4xNDIsMi45NjMtMC4xNDJjMC41OTktMC4wMzUsMC42NywwLjg0NiwwLjA3MSwwLjkxNw0KCQljMCwwLTAuNjAzLDAuMDctMS4yNzIsMC4xMDVsNC4wNDksMTIuMDQ1bDIuNDM0LTcuMjk4bC0xLjczMi00Ljc0N2MtMC41OTktMC4wMzUtMS4xNjctMC4xMDUtMS4xNjctMC4xMDUNCgkJYy0wLjYtMC4wMzYtMC41MjktMC45NTMsMC4wNy0wLjkxN2MwLDAsMS44MzYsMC4xNDIsMi45MjgsMC4xNDJjMS4xNjMsMCwyLjk2NC0wLjE0MiwyLjk2NC0wLjE0Mg0KCQljMC42LTAuMDM1LDAuNjcsMC44NDYsMC4wNzEsMC45MTdjMCwwLTAuNjA0LDAuMDctMS4yNzIsMC4xMDVsNC4wMTgsMTEuOTUzbDEuMTEtMy43MDZDMjAuMTg3LDE0LjU1LDIwLjQ2OSwxMy4zNTMsMjAuNDY5LDEyLjR6DQoJCSBNMTMuMTU4LDEzLjkzNWwtMy4zMzcsOS42OTRjMC45OTcsMC4yOTMsMi4wNSwwLjQ1MywzLjE0MiwwLjQ1M2MxLjI5NCwwLDIuNTM3LTAuMjI0LDMuNjkzLTAuNjMNCgkJYy0wLjAyOS0wLjA0OC0wLjA1Ny0wLjA5OS0wLjA4LTAuMTUzTDEzLjE1OCwxMy45MzV6IE0yMi43Miw3LjYyN2MwLjA0OSwwLjM1NCwwLjA3NSwwLjczNCwwLjA3NSwxLjE0NA0KCQljMCwxLjEyOC0wLjIxMiwyLjM5Ni0wLjg0NiwzLjk4MmwtMy4zOTYsOS44MmMzLjMwNi0xLjkyOCw1LjUyOS01LjUwOSw1LjUyOS05LjYxMUMyNC4wODIsMTEuMDI4LDIzLjU4OCw5LjIxLDIyLjcyLDcuNjI3eiIvPg0KCTxnPg0KCQk8cGF0aCBzdHlsZT0iZmlsbDojMDMwMTA0OyIgZD0iTTAsMTIuOTYyYzAsNy4xNDcsNS44MTUsMTIuOTYzLDEyLjk2MiwxMi45NjNjNy4xNDksMCwxMi45NjMtNS44MTYsMTIuOTYzLTEyLjk2Mw0KCQkJUzIwLjExMSwwLDEyLjk2MywwUzAsNS44MTQsMCwxMi45NjJ6IE0wLjU5NCwxMi45NjJjMC02LjgxOSw1LjU0OC0xMi4zNjgsMTIuMzY4LTEyLjM2OHMxMi4zNjksNS41NDksMTIuMzY5LDEyLjM2OA0KCQkJUzE5Ljc4MiwyNS4zMywxMi45NjMsMjUuMzNTMC41OTQsMTkuNzgxLDAuNTk0LDEyLjk2MnoiLz4NCgk8L2c+DQo8L2c+DQo8L3N2Zz4=
